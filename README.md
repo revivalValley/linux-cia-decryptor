@@ -1,12 +1,8 @@
 # Linux CIA Decryptor
 
-Decrypt Nintendo 3DS games, patches, and DLC on Ubuntu without a console,
-boot9 dump, or Wine. Based on **matif's**
-[3DS-stuff](https://github.com/matiffeder/3DS-stuff) batch decryptor.
-
 ## Setup
 
-Open a terminal in this folder and run:
+Download or clone this repository. Open a terminal in the project folder and run:
 
 ```bash
 sudo apt update
@@ -14,8 +10,7 @@ sudo apt install python3 python3-venv build-essential git
 ./setup.sh
 ```
 
-Setup downloads dependencies, builds `makerom`, and prepares keys and seeds.
-Run `setup.sh` without `sudo`. Decryption works offline afterward.
+Use an internet connection for setup. Run `setup.sh` without `sudo`.
 
 ## Decrypt
 
@@ -25,32 +20,29 @@ Copy your `.cia`, `.3ds`, or `.cci` files into this folder, then run:
 ./"Batch CIA 3DS Decryptor.sh"
 ```
 
-Outputs are saved beside the inputs. Original files are preserved.
+Wait for `Finished` and confirm that no files failed. Open the generated
+`-decrypted.cci` or `-decrypted.3ds` file beside your input in your emulator.
+Install generated patch or DLC `.cia` files through the emulator's install option.
 
-| Input | Output |
-| --- | --- |
-| Base-game `.cia` | `Game-decrypted.cci` |
-| Cartridge `.3ds` or `.cci` | `Game-decrypted.3ds` |
-| Patch `.cia` | `Game (Patch)-decrypted.cia` |
-| DLC `.cia` | `Game (DLC)-decrypted.cia` |
-
-Use `--output-dir results` to choose an output folder or `--force` to replace
-existing outputs. Names containing `decrypted` are skipped.
-System titles and DSiWare are not supported.
+Append `--output-dir results` to save outputs in another folder, or `--force`
+to replace existing outputs. Avoid input names containing `decrypted`.
+Use game, patch, or DLC files; do not use system titles or DSiWare.
 
 ## Troubleshooting
+
+Check `log.txt` for errors and run:
 
 ```bash
 .venv/bin/python3 cia_decryptor.py doctor
 ```
 
-Check `log.txt` for errors. Rerun `./setup.sh` if dependencies are missing.
-Use `--seeddb` to supply another database if a game's seed is missing.
+Rerun `./setup.sh` if dependencies are missing. If a game's seed is missing,
+append `--seeddb` followed by the path to a database containing that seed.
 
-## Credits and license
+## Acknowledgements
 
-Thanks to matif, Ian Burgwin (PyCTR), the Project_CTR authors (makerom),
-PyCryptodome contributors, and ihaveamac (seed database).
+Based on **matif's [3DS-stuff](https://github.com/matiffeder/3DS-stuff)**.
+Thanks to Ian Burgwin (PyCTR), the Project_CTR authors, PyCryptodome contributors,
+and ihaveamac.
 
-Project source uses the [MIT license](LICENSE). Dependency credits, licenses,
-and distribution notes are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+See [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
